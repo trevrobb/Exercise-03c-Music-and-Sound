@@ -31,5 +31,5 @@ Shaders
 
 ## Created by 
 
-Jason Francis
+Trevor Robbins
 ```
