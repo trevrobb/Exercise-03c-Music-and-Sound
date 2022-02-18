@@ -15,6 +15,9 @@ export var transparent_time = 1.0
 export var scale_time = 1.5
 export var rot_time = 1.5
 
+var whoosh = null
+var nock = null
+var coin = preload("res://Coin/Coin.tscn")
 
 
 func _ready():
@@ -36,9 +39,24 @@ func _physics_process(_delta):
 func generate(pos):
 	position = Vector2(pos.x,-100)
 	target_position = pos
+	if nock == null:
+		nock = get_node_or_null("/root/Game/2")
+	if nock != null:
+		nock.play()
 
 func move_piece(change):
 	target_position = target_position + change
+	if whoosh == null:
+		whoosh = get_node_or_null("/root/Game/1") 
+	if whoosh != null:
+		whoosh.play()
+		
 
 func die():
 	dying = true;
+	if Effects == null:
+		Effects = get_node_or_null("/root/Game/Effects")
+	if Effects != null:
+		coin = coin.instance()
+		coin.position = target_position
+		Effects.add_child(coin)
